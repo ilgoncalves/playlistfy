@@ -1,34 +1,30 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { SlideModal } from '../components';
+import React, { FC, useContext } from 'react';
+import { StatusBar } from 'react-native';
+import { Button, Div, Text, ThemeContext } from 'react-native-magnus';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { themes } from '../shared/theme/themes';
 
-export const Home: FC = () => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+export const Home: FC = ({}) => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const onToggle = () => {
+    if (theme.name === 'dark') {
+      setTheme(themes.light);
+      StatusBar.setBarStyle('dark-content');
+    } else {
+      setTheme(themes.dark);
+      StatusBar.setBarStyle('light-content');
+    }
+  };
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => setIsModalOpened(true)}>
-        <Text>abrir modal</Text>
-      </TouchableOpacity>
-      <SlideModal
-        isVisible={isModalOpened}
-        dismiss={() => setIsModalOpened(false)}>
-        <View style={styles.modalContent}>
-          <Text>content</Text>
-        </View>
-      </SlideModal>
-    </SafeAreaView>
+    <Div flex={1}>
+      <SafeAreaView>
+        <Div>
+          <Button onPress={onToggle}>
+            <Text color="gray100">Home</Text>
+          </Button>
+        </Div>
+      </SafeAreaView>
+    </Div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-  modalContent: {
-    flex: 1,
-    marginHorizontal: wp(2),
-  },
-});

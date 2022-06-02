@@ -1,20 +1,14 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Home } from './pages';
+import { ThemeProvider } from 'react-native-magnus';
+import { themes } from './shared/theme/themes';
+import Navigation from './navigation';
 
 const App: FC = () => {
   return (
-    <View style={styles.container}>
-      <Home />
-    </View>
+    <ThemeProvider theme={themes.light}>
+      <Navigation />
+    </ThemeProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});
 
 export default App;
