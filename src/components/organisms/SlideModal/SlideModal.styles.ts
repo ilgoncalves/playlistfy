@@ -11,6 +11,7 @@ interface Style {
 
 export default StyleSheet.create<Style>({
   container: {
+    zIndex: 10000,
     width: '100%',
     height: height,
     backgroundColor: 'rgba(80, 80, 80, 0.50)',
@@ -22,8 +23,8 @@ export default StyleSheet.create<Style>({
   },
   modal: {
     position: 'absolute',
-    height: '92%',
-    bottom: '-12%',
+    height: '96%',
+    bottom: '-4%',
     backgroundColor: '#fff',
     width: wp(100),
     borderTopLeftRadius: 32,

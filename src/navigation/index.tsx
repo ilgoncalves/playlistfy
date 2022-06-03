@@ -32,7 +32,6 @@ const Navigation = () => {
       [SCREENS.SEARCH]: 'magnifier',
       [SCREENS.PLAYLISTS]: 'playlist',
     };
-    console.log(routes[route.name]);
 
     return (
       <Icon
@@ -55,6 +54,9 @@ const Navigation = () => {
           tabBarInactiveTintColor: '#a0aec0',
           tabBarStyle: {
             backgroundColor: isDarkMode ? '#1a202c' : '#f7fafc',
+          },
+          tabBarLabel: () => {
+            return null;
           },
         })}>
         <Tab.Screen name={SCREENS.HOME} component={Home} />

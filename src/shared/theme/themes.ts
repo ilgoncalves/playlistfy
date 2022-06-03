@@ -1,13 +1,18 @@
 import { ThemeType } from 'react-native-magnus';
 import fonts from './fonts';
-
 type themesNames = 'light' | 'dark';
 type MyThemeType = {
   [name in themesNames]: ThemeType;
 };
+
+const colors = {
+  blue900: '#2E4C6D',
+};
+
 export const themes: MyThemeType = {
   light: {
     name: 'light',
+    colors,
     components: {
       Div: {
         bg: 'gray300',
@@ -20,6 +25,7 @@ export const themes: MyThemeType = {
   },
   dark: {
     name: 'dark',
+    colors,
     components: {
       Div: {
         bg: 'gray700',
