@@ -4,7 +4,7 @@ import { themes } from './shared/theme/themes';
 import Navigation from './navigation';
 import { SetupService } from './services';
 import { useCurrentTrack } from './hooks';
-import { CurrentTrackOverlay, PlayerModal, SlideModal } from './components';
+import { CurrentTrackOverlay, PlayerModal } from './components';
 
 const App: FC = () => {
   const track = useCurrentTrack();

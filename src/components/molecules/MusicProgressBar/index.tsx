@@ -7,7 +7,7 @@ interface IMusicProgressBarProps {}
 
 export const MusicProgressBar: FC<IMusicProgressBarProps> = ({}) => {
   return (
-    <Div px={4} bg="transparent" flex={1} w="100%">
+    <Div px={4} bg="transparent" w="100%">
       <Slider
         style={{ height: 28, padding: 0, margin: 0 }}
         minimumValue={0}

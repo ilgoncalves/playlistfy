@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { Text } from 'react-native-magnus';
+import { Div } from 'react-native-magnus';
 import { SlideModal } from '../SlideModal';
+import { HeaderPlayer, DisplayMusic } from '../../molecules';
 
 interface IPlayerModalProps {
   isPlayerOpened: boolean;
@@ -15,7 +16,10 @@ export const PlayerModal: FC<IPlayerModalProps> = ({
     <SlideModal
       dismiss={() => setIsPlayerOpened(false)}
       isVisible={isPlayerOpened}>
-      <Text>teste</Text>
+      <Div bg="#2E4C6D" flex={1}>
+        <HeaderPlayer />
+        <DisplayMusic />
+      </Div>
     </SlideModal>
   );
 };

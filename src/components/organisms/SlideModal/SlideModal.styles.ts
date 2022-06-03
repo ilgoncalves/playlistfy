@@ -25,7 +25,7 @@ export default StyleSheet.create<Style>({
     position: 'absolute',
     height: '96%',
     bottom: '-4%',
-    backgroundColor: '#fff',
+    backgroundColor: '#2E4C6D',
     width: wp(100),
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,

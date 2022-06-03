@@ -14,5 +14,3 @@ export const Player: FC<IPlayerProps> = () => {
     </Div>
   );
 };
-
-// const styles = StyleSheet.create({})
