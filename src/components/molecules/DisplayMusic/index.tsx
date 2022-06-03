@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Div, Image, Text } from 'react-native-magnus';
 import fonts from '../../../shared/theme/fonts';
-import { MusicProgressBar, MediaButtons } from '../../molecules';
+import { MediaButtons } from '../MediaButtons';
+import { MusicProgressBar } from '../MusicProgressBar';
 
 export const DisplayMusic: FC = () => {
   return (
