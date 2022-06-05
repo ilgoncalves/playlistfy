@@ -1,4 +1,4 @@
-export * from './SearchMusicCard';
+export * from './MusicCard';
 export * from './CurrentTrackOverlay';
 export * from './MusicProgressBar';
 export * from './HeaderPlayer';

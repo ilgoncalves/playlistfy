@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { isReadyRef, navigationRef } from 'react-navigation-helpers';
@@ -7,6 +7,7 @@ import { SCREENS } from '../shared/constants';
 // Pages
 import { Home, Player, Search, Playlists } from '../pages';
 import { Icon, ThemeContext } from 'react-native-magnus';
+import { StatusBar } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -16,7 +17,11 @@ const Navigation = () => {
 
   const isDarkMode = theme.name === 'dark';
 
-  React.useEffect((): any => {
+  useEffect(() => {
+    StatusBar.setBarStyle(isDarkMode ? 'light-content' : 'dark-content');
+  }, [theme]);
+
+  useEffect((): any => {
     return () => (isReadyRef.current = false);
   }, []);
 
