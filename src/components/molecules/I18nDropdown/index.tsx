@@ -1,10 +1,21 @@
-import React, { FC, Ref } from 'react';
+import React, { FC, ReactNode, Ref } from 'react';
 import { Dropdown, Text, DropdownRef } from 'react-native-magnus';
 
 interface II18nDropdownProps {
   dropdownRef: Ref<DropdownRef>;
 }
 export const I18nDropdown: FC<II18nDropdownProps> = ({ dropdownRef }) => {
+  const Option = ({
+    value,
+    children,
+  }: {
+    value: string;
+    children: ReactNode;
+  }) => (
+    <Dropdown.Option value={value} py="lg" px="xl" block>
+      {children}
+    </Dropdown.Option>
+  );
   return (
     <Dropdown
       ref={dropdownRef}
@@ -17,12 +28,8 @@ export const I18nDropdown: FC<II18nDropdownProps> = ({ dropdownRef }) => {
       pb="2xl"
       showSwipeIndicator={true}
       roundedTop="xl">
-      <Dropdown.Option value="english" py="md" px="xl" block>
-        Inglês
-      </Dropdown.Option>
-      <Dropdown.Option value="portuguese" py="md" px="xl" block>
-        Português
-      </Dropdown.Option>
+      <Option value="english">Inglês</Option>
+      <Option value="portuguese">Português</Option>
     </Dropdown>
   );
 };

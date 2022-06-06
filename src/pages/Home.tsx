@@ -1,5 +1,7 @@
 import React, { createRef, FC } from 'react';
 import { Button, Div, DropdownRef, Text } from 'react-native-magnus';
+import fonts from '../shared/theme/fonts';
+import { Welcoming } from '../assets/svgs';
 import { DarkModeToggle, Header, I18nDropdown } from '../components';
 
 export const Home: FC = ({}) => {
@@ -20,6 +22,16 @@ export const Home: FC = ({}) => {
           </Button>
         </Div>
         <I18nDropdown dropdownRef={dropdownRef} />
+        <Welcoming width={397.72474 / 1.2} height={407.127 / 1.2} />
+        <Text
+          fontFamily={fonts.roboto.italic}
+          mt={20}
+          textAlign="center"
+          fontSize={18}>
+          Bem vindo ao Playlistfy, aqui você vai encontrar todos os estilos
+          musicais para ouvir. Vamos começar pesquisando uma música na segunda
+          aba...
+        </Text>
       </Div>
     </Div>
   );
