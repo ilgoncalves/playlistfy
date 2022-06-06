@@ -12,7 +12,7 @@ export type ContextType = {
   setActive: (active: number) => void;
   setSwipeIndex: (swipeIndex: number) => void;
 
-  updateTrackPlayer: (current: number) => Promise<void>;
+  updateTrackPlayer: (currentPlaylistId: number) => Promise<void>;
 };
 
 export const Context = createContext<ContextType>({} as ContextType);

@@ -1,16 +1,41 @@
 import React, { FC } from 'react';
-import { GestureResponderEvent, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Div, Icon } from 'react-native-magnus';
 import { iconFontFamilyType } from 'react-native-magnus/lib/typescript/src/ui/icon/icon.type';
+import TrackPlayer from 'react-native-track-player';
+import { usePlayer } from '../../../provider';
 
 interface IOpacityIconButtonProps {
-  onPress?: (event: GestureResponderEvent) => void;
+  onPress?: any;
   name: string;
   fontFamily?: iconFontFamilyType;
   fontSize?: number;
 }
 
 export const MediaButtons: FC = () => {
+  const { isPlaying } = usePlayer();
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      TrackPlayer.pause();
+    } else {
+      TrackPlayer.play();
+    }
+  };
+
+  const onPressNext = async () => {
+    TrackPlayer.skipToNext();
+  };
+
+  const onPressPrevious = async () => {
+    const position = await TrackPlayer.getPosition();
+
+    if (position > 3) {
+      TrackPlayer.seekTo(0);
+    } else {
+      TrackPlayer.skipToPrevious();
+    }
+  };
+
   const OpacityIconButton: FC<IOpacityIconButtonProps> = ({
     onPress,
     name,
@@ -34,9 +59,21 @@ export const MediaButtons: FC = () => {
       flexDir="row"
       alignItems="center">
       <OpacityIconButton name="hearto" />
-      <OpacityIconButton fontFamily="Feather" name="skip-back" />
-      <OpacityIconButton fontSize={60} name="play" />
-      <OpacityIconButton fontFamily="Feather" name="skip-forward" />
+      <OpacityIconButton
+        onPress={() => onPressPrevious()}
+        fontFamily="Feather"
+        name="skip-back"
+      />
+      <OpacityIconButton
+        onPress={handlePlayPause}
+        fontSize={60}
+        name={isPlaying ? 'pausecircle' : 'play'}
+      />
+      <OpacityIconButton
+        onPress={onPressNext}
+        fontFamily="Feather"
+        name="skip-forward"
+      />
       <OpacityIconButton name="retweet" />
     </Div>
   );

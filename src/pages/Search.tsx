@@ -3,43 +3,71 @@ import { Div } from 'react-native-magnus';
 import { MusicList } from '../components/organisms';
 import { Header, SearchInput } from '../components';
 import { TRACKS } from './pages.mocks';
-import { usePlaylist } from '../provider';
 import { debounce } from '../utils';
+import { IPlaylist, ITrack } from '../interfaces';
+import { ActivityIndicator } from 'react-native';
+import { usePlaylist } from '../provider';
 
 export const Search: FC = () => {
-  const { tracks, setTracks } = usePlaylist();
+  const { setLists } = usePlaylist();
+  const SEARCH_PLAYLIST: IPlaylist = {
+    id: 18028987,
+    items: [],
+    title: 'Searched Musics',
+  };
   const [searchText, setSearchText] = useState('');
+  const [searchResult, setSearchResult] = useState<IPlaylist | null>(null);
+
+  const [loading, setLoading] = useState(false);
 
   const optimizedSearch = useMemo(
-    () => debounce((toSeach: string) => handleSearch(toSeach)),
+    () => debounce((toSearch: string) => handleSearch(toSearch)),
     [],
   );
 
-  const handleSearch = (toSearch: string) => {
-    console.log(toSearch);
-    setTracks(TRACKS);
+  const getMusics = (): Promise<Array<ITrack>> => {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(TRACKS), 1000);
+    });
+  };
+
+  const handleSearch = async (toSearch: string) => {
+    try {
+      console.log(toSearch);
+      setLoading(true);
+      const response = await getMusics();
+      if (response) {
+        const playlist = { ...SEARCH_PLAYLIST, items: response };
+        setLists([playlist]);
+        setSearchResult(playlist);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Div flex={1}>
-      <Div px={24}>
-        <Header>Pesquisar</Header>
-        <SearchInput
-          onChangeText={text => {
-            setSearchText(text);
-            // @ts-ignore
-            optimizedSearch(text);
-          }}
-          value={searchText}
-        />
-      </Div>
-      <MusicList
-        playlist={{
-          id: 0,
-          items: tracks,
-          title: 'Searched Musics',
+      <Header>Pesquisar</Header>
+      <SearchInput
+        mx={24}
+        mb={20}
+        onChangeText={text => {
+          setSearchText(text);
+          // @ts-ignore
+          optimizedSearch(text);
         }}
+        value={searchText}
       />
+      {loading ? (
+        <Div flex={1} alignItems="center" justifyContent="center">
+          <ActivityIndicator size="large" color="white" />
+        </Div>
+      ) : (
+        <MusicList playlist={searchResult} />
+      )}
     </Div>
   );
 };

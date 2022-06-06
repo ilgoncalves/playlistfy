@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
 
 import { IPlaylist, ITrack } from '../../interfaces';
@@ -12,25 +12,27 @@ interface Props {
 }
 
 export const PlaylistProvider: React.FC<Props> = ({ children }: Props) => {
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState<number>(-1);
   const [lists, setLists] = useState<IPlaylist[]>([]);
   const [tracks, setTracks] = useState<ITrack[]>([]);
   const [swipeIndex, setSwipeIndex] = useState<number>(0);
 
-  useEffect(() => {
-    updateTrackPlayer(0);
-  }, [tracks, lists]);
+  const updateTrackPlayer = async (currentPlaylistId: number) => {
+    setActive(currentPlaylistId);
 
-  const updateTrackPlayer = async (current: number) => {
-    setActive(current);
+    const activePlaylist = lists.find(
+      playlist => playlist.id === currentPlaylistId,
+    );
 
-    if (tracks.length) {
-      const activeTracks = lists.length ? lists[current]?.items : tracks;
+    console.log('entrou', activePlaylist);
+    if (activePlaylist) {
+      const activeTracks = activePlaylist.items;
+      console.log(activeTracks);
 
       await TrackPlayer.reset();
 
       // @ts-ignore
-      await TrackPlayer.add(activeTracks).then(function () {});
+      await TrackPlayer.add(activeTracks);
     }
   };
 

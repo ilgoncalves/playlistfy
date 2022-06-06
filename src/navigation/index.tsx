@@ -3,14 +3,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { isReadyRef, navigationRef } from 'react-navigation-helpers';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SCREENS } from '../shared/constants';
 // Pages
-import { Home, Player, Search, Playlists } from '../pages';
+import { Home, Search, Playlists, PlaylistMusics } from '../pages';
 import { Icon, ThemeContext } from 'react-native-magnus';
 import { StatusBar } from 'react-native';
+import { RootStackParamList, SCREENS } from '../interfaces';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   const { theme } = useContext(ThemeContext);
@@ -25,17 +25,12 @@ const Navigation = () => {
     return () => (isReadyRef.current = false);
   }, []);
 
-  const renderTabIcon = (
-    route: any,
-    focused: boolean,
-    color: string,
-    size: number,
-  ) => {
+  const renderTabIcon = (route: any, color: string, size: number) => {
     let iconName = 'home';
-    let routes = {
+    let routes: any = {
       [SCREENS.HOME]: 'home',
       [SCREENS.SEARCH]: 'magnifier',
-      [SCREENS.PLAYLISTS]: 'playlist',
+      [SCREENS.PLAYLIST_STACK]: 'playlist',
     };
 
     return (
@@ -48,13 +43,25 @@ const Navigation = () => {
     );
   };
 
+  const PlaylistStack = () => {
+    return (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={SCREENS.PLAYLISTS} component={Playlists} />
+        <Stack.Screen
+          name={SCREENS.PLAYLIST_MUSICS}
+          component={PlaylistMusics}
+        />
+      </Stack.Navigator>
+    );
+  };
+
   const HomeTabNavigation = () => {
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarIcon: ({ focused, color, size }) =>
-            renderTabIcon(route, focused, color, size),
+          unmountOnBlur: true,
+          tabBarIcon: ({ color, size }) => renderTabIcon(route, color, size),
           tabBarActiveTintColor: '#ed8936',
           tabBarInactiveTintColor: '#a0aec0',
           tabBarStyle: {
@@ -66,7 +73,7 @@ const Navigation = () => {
         })}>
         <Tab.Screen name={SCREENS.HOME} component={Home} />
         <Tab.Screen name={SCREENS.SEARCH} component={Search} />
-        <Tab.Screen name={SCREENS.PLAYLISTS} component={Playlists} />
+        <Tab.Screen name={SCREENS.PLAYLIST_STACK} component={PlaylistStack} />
       </Tab.Navigator>
     );
   };
@@ -78,13 +85,7 @@ const Navigation = () => {
         isReadyRef.current = true;
       }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
-          name={SCREENS.HOME + 'Tab'}
-          component={HomeTabNavigation}
-        />
-        <Stack.Screen options={{ presentation: 'modal' }} name={SCREENS.PLAYER}>
-          {props => <Player {...props} />}
-        </Stack.Screen>
+        <Stack.Screen name={SCREENS.HOME_TAB} component={HomeTabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

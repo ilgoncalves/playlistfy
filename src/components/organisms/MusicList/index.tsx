@@ -4,15 +4,15 @@ import { IPlaylist } from '../../../interfaces';
 import { MusicCard } from '../../molecules';
 
 interface IMusicListProps {
-  playlist: IPlaylist;
+  playlist: IPlaylist | undefined | null;
 }
 
 export const MusicList: FC<IMusicListProps> = ({ playlist }) => {
   return (
-    <ScrollDiv px={24} showsVerticalScrollIndicator={false}>
+    <ScrollDiv pb={50} px={24} showsVerticalScrollIndicator={false}>
       {playlist?.items.map(el => {
         return (
-          <MusicCard playlistId={playlist.id} key={`music-${el.id}`} {...el} />
+          <MusicCard playslist={playlist} key={`music-${el.id}`} {...el} />
         );
       })}
     </ScrollDiv>

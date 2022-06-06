@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Div } from 'react-native-magnus';
 import { SlideModal } from '../SlideModal';
-import { HeaderPlayer, DisplayMusic } from '../../molecules';
+import { DisplayMusic, HeaderPlayer } from '../../molecules';
 
 interface IPlayerModalProps {
   isPlayerOpened: boolean;

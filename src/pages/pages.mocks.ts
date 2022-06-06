@@ -1,60 +1,4 @@
-import { ITrack } from '~/interfaces';
-
-export const MUSICS: Array<ITrack> = [
-  {
-    id: '1',
-    artwork:
-      'https://rapforte.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-01-at-21.18.02.jpeg',
-    title: 'Vampiro',
-    artist: 'Matue',
-    duration: '',
-    url: '',
-  },
-  {
-    id: '2',
-    artwork:
-      'https://i1.sndcdn.com/artworks-T2B6wF3krypHEH09-dBGt8Q-t500x500.jpg',
-    title: 'Groupies',
-    artist: 'Doode',
-    duration: '',
-    url: '',
-  },
-  {
-    id: '3',
-    artwork: 'https://i1.sndcdn.com/artworks-000167710996-vhgos3-t500x500.jpg',
-    title: 'Esse cara aqui do lado',
-    artist: 'Marilia Mendonça',
-    duration: '',
-    url: '',
-  },
-  {
-    id: '4',
-    artwork:
-      'https://rapforte.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-01-at-21.18.02.jpeg',
-    title: 'Vampiro',
-    artist: 'Matue',
-    duration: '',
-    url: '',
-  },
-  {
-    id: '5',
-    artwork:
-      'https://rapforte.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-01-at-21.18.02.jpeg',
-    title: 'Vampiro',
-    artist: 'Matue',
-    duration: '',
-    url: '',
-  },
-  {
-    id: '6',
-    artwork:
-      'https://rapforte.com/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-01-at-21.18.02.jpeg',
-    title: 'Vampiro',
-    artist: 'Matue',
-    duration: '',
-    url: '',
-  },
-];
+import { ITrack } from '../interfaces';
 
 export const TRACKS: Array<ITrack> = [
   {
@@ -95,7 +39,12 @@ export const TRACKS: Array<ITrack> = [
 export const PLAYLISTS = [
   {
     id: 1,
-    title: 'Playlist 1',
-    items: [TRACKS[0], TRACKS[2], TRACKS[3]],
+    title: 'Pop',
+    items: [TRACKS[1], TRACKS[2]],
+  },
+  {
+    id: 2,
+    title: 'Rock',
+    items: [TRACKS[0], TRACKS[3]],
   },
 ];

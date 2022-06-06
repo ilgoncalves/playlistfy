@@ -2,35 +2,30 @@ import React, { FC } from 'react';
 import { Button, Icon, Image, Div, Text } from 'react-native-magnus';
 import TrackPlayer, { Event, State } from 'react-native-track-player';
 import { usePlaylist } from '../../../provider';
-import { ITrack } from '../../../interfaces';
+import { IPlaylist, ITrack } from '../../../interfaces';
 
 interface IMusicCard extends ITrack {
-  playlistId: number;
+  playslist: IPlaylist;
 }
 
 export const MusicCard: FC<IMusicCard> = ({
-  playlistId,
+  playslist,
   artist,
   title,
   artwork,
   id,
 }) => {
   const rounded = 'xl';
-  const { tracks, active, updateTrackPlayer } = usePlaylist();
+  const { active, updateTrackPlayer } = usePlaylist();
 
   const onPress = async () => {
-    console.log(active);
-    if (active !== playlistId) {
-      console.log('ei');
-      await updateTrackPlayer(playlistId);
+    if (active === -1 || active !== playslist.id) {
+      await updateTrackPlayer(playslist.id);
     }
 
     const state = await TrackPlayer.getState();
-    console.log(
-      'MUSIC Id',
-      tracks.findIndex(el => el.id === id),
-    );
-    await TrackPlayer.skip(tracks.findIndex(el => el.id === id));
+
+    await TrackPlayer.skip(playslist.items.findIndex(el => el.id === id));
 
     if (state !== State.Playing) {
       let subscription = TrackPlayer.addEventListener(
@@ -50,7 +45,6 @@ export const MusicCard: FC<IMusicCard> = ({
     <Div shadow="sm" mb={16} rounded={rounded}>
       <Button onPress={onPress} bg="gray400" rounded={rounded}>
         <Div flex={1} bg="transparent" flexDir="row">
-          {/* @ts-ignore */}
           <Image h={72} w={72} rounded={rounded} source={{ uri: artwork }} />
           <Div
             justifyContent="space-between"
