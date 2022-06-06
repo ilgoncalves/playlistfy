@@ -4,10 +4,13 @@ import { Header } from '../components';
 import { PLAYLISTS } from './pages.mocks';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList, SCREENS } from '../interfaces';
+import { useTranslation } from 'react-i18next';
+import { TranslationsKeys } from '../assets/i18n';
 import { usePlaylist } from '../provider';
 
 export const Playlists: FC = ({}) => {
   const { setLists } = usePlaylist();
+  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handlePressPlaylist = async (playlistId: number) => {
@@ -17,7 +20,7 @@ export const Playlists: FC = ({}) => {
 
   return (
     <Div flex={1}>
-      <Header>Playlists</Header>
+      <Header>{t(TranslationsKeys.Playlists)}</Header>
       <Div px={24}>
         {PLAYLISTS.map(playlist => (
           <Button

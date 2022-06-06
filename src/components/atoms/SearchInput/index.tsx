@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { TextInput } from 'react-native';
 import { Div, Icon, DivProps } from 'react-native-magnus';
-
+import { useTranslation } from 'react-i18next';
+import { TranslationsKeys } from '../../../assets/i18n';
 interface ISearchInputProps extends DivProps {
   onChangeText: ((text: string) => void) | undefined;
   value: string;
@@ -12,6 +13,7 @@ export const SearchInput: FC<ISearchInputProps> = ({
   value,
   ...props
 }) => {
+  const { t } = useTranslation();
   return (
     <Div
       borderColor="gray200"
@@ -26,7 +28,7 @@ export const SearchInput: FC<ISearchInputProps> = ({
       <Icon name="search" color="gray900" fontFamily="Feather" />
       <TextInput
         placeholderTextColor="#A0AEC0"
-        placeholder="Pesquisar musicas, artitas ou playlist"
+        placeholder={t(TranslationsKeys.SearchInput)}
         value={value}
         onChangeText={onChangeText}
         // eslint-disable-next-line react-native/no-inline-styles

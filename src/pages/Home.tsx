@@ -2,13 +2,16 @@ import React, { createRef, FC } from 'react';
 import { Button, Div, DropdownRef, Text } from 'react-native-magnus';
 import fonts from '../shared/theme/fonts';
 import { Welcoming } from '../assets/svgs';
+import { useTranslation } from 'react-i18next';
+import { TranslationsKeys } from '../assets/i18n';
 import { DarkModeToggle, Header, I18nDropdown } from '../components';
 
 export const Home: FC = ({}) => {
   const dropdownRef = createRef<DropdownRef>();
+  const { t } = useTranslation();
   return (
     <Div flex={1}>
-      <Header>Home</Header>
+      <Header>{t(TranslationsKeys.Home)}</Header>
       <Div px={24}>
         <DarkModeToggle />
         <Div
@@ -16,9 +19,9 @@ export const Home: FC = ({}) => {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between">
-          <Text fontSize={16}>Liguagem do aplicativo</Text>
+          <Text fontSize={16}>{t(TranslationsKeys.AppLanguage)}</Text>
           <Button bg="orange700" onPress={() => dropdownRef.current?.open()}>
-            selecionar
+            {t(TranslationsKeys.Select)}
           </Button>
         </Div>
         <I18nDropdown dropdownRef={dropdownRef} />
@@ -28,9 +31,7 @@ export const Home: FC = ({}) => {
           mt={20}
           textAlign="center"
           fontSize={18}>
-          Bem vindo ao Playlistfy, aqui você vai encontrar todos os estilos
-          musicais para ouvir. Vamos começar pesquisando uma música na segunda
-          aba...
+          {t(TranslationsKeys.WelcomeText)}
         </Text>
       </Div>
     </Div>

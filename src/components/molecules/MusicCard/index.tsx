@@ -3,7 +3,8 @@ import { Button, Icon, Image, Div, Text } from 'react-native-magnus';
 import TrackPlayer, { Event, State } from 'react-native-track-player';
 import { usePlaylist } from '../../../provider';
 import { IPlaylist, ITrack } from '../../../interfaces';
-
+import { useTranslation } from 'react-i18next';
+import { TranslationsKeys } from '../../../assets/i18n';
 interface IMusicCard extends ITrack {
   playslist: IPlaylist;
 }
@@ -15,6 +16,7 @@ export const MusicCard: FC<IMusicCard> = ({
   artwork,
   id,
 }) => {
+  const { t } = useTranslation();
   const rounded = 'xl';
   const { active, updateTrackPlayer } = usePlaylist();
 
@@ -60,10 +62,9 @@ export const MusicCard: FC<IMusicCard> = ({
               fontSize={16}>
               {title}
             </Text>
-            <Text
-              numberOfLines={1}
-              color="gray900"
-              fontSize={12}>{`Artista - ${artist}`}</Text>
+            <Text numberOfLines={1} color="gray900" fontSize={12}>
+              {`${t(TranslationsKeys.Artist)} - ${artist}`}
+            </Text>
           </Div>
           <Icon
             name="play"

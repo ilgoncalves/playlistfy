@@ -6,11 +6,14 @@ import { SPOTIFY_ACCESS_TOKEN } from '@env';
 import { MusicList } from '../components/organisms';
 import { Header, SearchInput } from '../components';
 import { debounce, timeFormat } from '../utils';
+import { useTranslation } from 'react-i18next';
+import { TranslationsKeys } from '../assets/i18n';
 import { IPlaylist, ISpotifySearchResponse, ITrack } from '../interfaces';
 import { usePlaylist } from '../provider';
 
 export const Search: FC = () => {
   const { setLists } = usePlaylist();
+  const { t } = useTranslation();
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState<IPlaylist | null>(null);
 
@@ -71,7 +74,7 @@ export const Search: FC = () => {
 
   return (
     <Div flex={1}>
-      <Header>Pesquisar</Header>
+      <Header>{t(TranslationsKeys.Search)}</Header>
       <SearchInput
         mx={24}
         mb={20}
