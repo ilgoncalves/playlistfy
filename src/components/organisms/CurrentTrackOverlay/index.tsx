@@ -99,9 +99,7 @@ export const CurrentTrackOverlay: FC<ICurrentTrackOverlayProps> = ({}) => {
                     />
                   </TouchableOpacity>
                 </Div>
-                <Div bg="transparent" flexDir="row">
-                  <MusicProgressBar />
-                </Div>
+                <MusicProgressBar />
               </Div>
             </Button>
           </Div>
