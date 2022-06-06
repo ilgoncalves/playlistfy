@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, Div } from 'react-native-magnus';
+import { Button, Div, Text } from 'react-native-magnus';
 import { Header } from '../components';
 import { PLAYLISTS } from './pages.mocks';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -21,9 +21,15 @@ export const Playlists: FC = ({}) => {
       <Div px={24}>
         {PLAYLISTS.map(playlist => (
           <Button
+            w="100%"
+            mb="md"
+            bg="gray400"
+            rounded="md"
             key={playlist.id}
             onPress={() => handlePressPlaylist(playlist.id)}>
-            {playlist.title}
+            <Text color="gray900" fontSize={16}>
+              {playlist.title}
+            </Text>
           </Button>
         ))}
       </Div>
