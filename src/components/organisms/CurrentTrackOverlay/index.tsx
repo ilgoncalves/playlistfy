@@ -82,6 +82,8 @@ export const CurrentTrackOverlay: FC<ICurrentTrackOverlayProps> = ({}) => {
                   <Text
                     textShadowRadius={4}
                     textShadowColor="black"
+                    numberOfLines={1}
+                    pr={20}
                     fontSize={18}
                     ellipsizeMode="tail"
                     color="gray100"
@@ -99,7 +101,7 @@ export const CurrentTrackOverlay: FC<ICurrentTrackOverlayProps> = ({}) => {
                     />
                   </TouchableOpacity>
                 </Div>
-                <MusicProgressBar />
+                {!modalOpen && <MusicProgressBar />}
               </Div>
             </Button>
           </Div>

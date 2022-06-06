@@ -18,7 +18,7 @@ export const PlayerModal: FC<IPlayerModalProps> = ({
       isVisible={isPlayerOpened}>
       <Div bg="#2E4C6D" flex={1}>
         <HeaderPlayer />
-        <DisplayMusic />
+        <DisplayMusic isPlayerOpened={isPlayerOpened} />
       </Div>
     </SlideModal>
   );

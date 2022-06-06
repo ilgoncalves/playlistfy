@@ -50,12 +50,20 @@ export const MusicCard: FC<IMusicCard> = ({
             justifyContent="space-between"
             flex={1}
             py={16}
+            pr={20}
             pl={12}
             bg="transparent">
-            <Text color="gray900" fontWeight="bold" fontSize={16}>
+            <Text
+              numberOfLines={2}
+              color="gray900"
+              fontWeight="bold"
+              fontSize={16}>
               {title}
             </Text>
-            <Text color="gray900" fontSize={12}>{`Artista - ${artist}`}</Text>
+            <Text
+              numberOfLines={1}
+              color="gray900"
+              fontSize={12}>{`Artista - ${artist}`}</Text>
           </Div>
           <Icon
             name="play"

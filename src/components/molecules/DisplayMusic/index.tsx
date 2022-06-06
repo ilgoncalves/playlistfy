@@ -6,7 +6,10 @@ import { MusicProgressBar } from '../MusicProgressBar';
 
 import { usePlayer } from '../../../provider';
 
-export const DisplayMusic: FC = () => {
+interface IDisplayMusicProps {
+  isPlayerOpened: boolean;
+}
+export const DisplayMusic: FC<IDisplayMusicProps> = ({ isPlayerOpened }) => {
   const { track } = usePlayer();
 
   const hasNoImage = useMemo(
@@ -33,13 +36,14 @@ export const DisplayMusic: FC = () => {
         <Text
           textShadowRadius={4}
           textShadowColor="black"
+          numberOfLines={2}
           fontSize={18}
           mb={20}
           color="gray100"
           fontFamily={fonts.roboto.bold}>
           {track.title} - {track.artist}
         </Text>
-        <MusicProgressBar />
+        {isPlayerOpened && <MusicProgressBar />}
       </Div>
       <MediaButtons />
     </Div>
