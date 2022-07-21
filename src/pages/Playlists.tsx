@@ -10,8 +10,8 @@ import { usePlaylist } from '../provider';
 
 export const Playlists: FC = ({}) => {
   const { setLists } = usePlaylist();
-  const { t } = useTranslation();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { t } = useTranslation();
 
   const handlePressPlaylist = async (playlistId: number) => {
     setLists(PLAYLISTS);
