@@ -15,7 +15,6 @@ export const Playlists: FC = ({}) => {
 
   const handlePressPlaylist = async (playlistId: number) => {
     setLists(PLAYLISTS);
-
     navigation.navigate(SCREENS.PLAYLIST_MUSICS, { playlistId });
   };
 
